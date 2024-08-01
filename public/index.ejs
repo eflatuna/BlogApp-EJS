@@ -243,57 +243,36 @@
 							<h3 class="fst-italic">Recent Posts</h3>
 							<ul class="list-unstyled">
 								<!-- Recent posts -->
+								<% recentPosts.forEach(item => { %>
 								<li>
 									<a
 										class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
 										href="/post/:id"
 									>
 										<div class="col-lg-8">
-											<h5>Sample Blog Post</h5>
-											<p class="my-2">
+											<h5><%= item.title %></h5>
+											<!-- <p class="my-2">
 												Lorem ipsum dolor sit amet
 												consectetur adipisicing elit...
+											</p> -->
+											<!-- <div class="line-clamp-3 my-2">
+												<%- item.content %>
+											</div> -->
+											<p class="line-clamp-3 my-2">
+												<%=
+												item.content.replace(/<(.|\n)*?>/g,'')
+												%>
 											</p>
 											<small class="text-body-secondary"
-												>January 15, 2023</small
+												><%=
+												item.createdAt.toLocaleString()
+												%></small
 											>
 										</div>
 									</a>
 								</li>
-								<li>
-									<a
-										class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-										href="/post/:id"
-									>
-										<div class="col-lg-8">
-											<h5>Sample Blog Post</h5>
-											<p class="my-2">
-												Lorem ipsum dolor sit amet
-												consectetur adipisicing elit...
-											</p>
-											<small class="text-body-secondary"
-												>January 15, 2023</small
-											>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a
-										class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-										href="/post/:id"
-									>
-										<div class="col-lg-8">
-											<h5>Sample Blog Post</h5>
-											<p class="my-2">
-												Lorem ipsum dolor sit amet
-												consectetur adipisicing elit...
-											</p>
-											<small class="text-body-secondary"
-												>January 15, 2023</small
-											>
-										</div>
-									</a>
-								</li>
+
+								<% }) %>
 							</ul>
 						</div>
 					</div>
