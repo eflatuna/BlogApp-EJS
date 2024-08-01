@@ -37,7 +37,9 @@ app.set("views", "./public"); //* views klasörü yerine public klasörünü kul
 // app.use(express.urlencoded({extended:false}));
 app.use(express.urlencoded({ extended: true }));
 
+// serve static files
 app.use("/assets", express.static("./public/assets"));
+//* /assets uzantısı görürsen bunun için public klasöründeki assetse erişim sağla.
 
 //? user control
 app.use(require("./src/middlewares/userControl"));
@@ -69,11 +71,11 @@ app.use(require("./src/middlewares/findSearchSortPagi"));
 
 app.use("/api/blog", require("./src/routes/blogRoute"));
 app.use("/api/user", require("./src/routes/user.route"));
-app.use("/", require("./src/routes/view"));
+app.use("/", require("./src/routes/views"));
 
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));
 
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
 
-// require("./src/configs/sync")();
+// require("./src/configs/sync")()
