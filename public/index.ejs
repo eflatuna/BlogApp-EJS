@@ -57,17 +57,17 @@
 			<div class="nav-scroller py-1 mb-3 border-bottom">
 				<nav class="nav nav-underline justify-content-between">
 					<a
-						class="nav-item nav-link link-body-emphasis <%=!selectedCategory ? 'active' : '' %>"
+						class="nav-item nav-link link-body-emphasis <%= !selectedCategory ? 'active' : '' %>"
 						href="/post"
 						>All</a
 					>
-					<% categories.forEach(category=> { %><a
-						class="nav-item nav-link link-body-emphasis <% if (category.id == selectedCategory) { %> active <% } %>"
-						href="/post?filter[blogCategoryId]=<%=category.id  %>"
+					<% categories.forEach(category => { %>
+					<a
+						class="nav-item nav-link link-body-emphasis <% if(category.id == selectedCategory) { %> active <%}%>"
+						href="/post?filter[blogCategoryId]=<%= category.id %>"
+						><%= category.name %></a
 					>
-						<%= category.name %></a
-					>
-					<%} ) %>
+					<% }) %>
 				</nav>
 			</div>
 		</div>
@@ -97,9 +97,9 @@
 							<%= post.createdAt.toLocaleString() %>
 						</p>
 						<div class="line-clamp-3">
-							<!-- <%# post.content.substring(0,400) %> -->
-							<%- post.content %>
+							<%#= post.content %> <%- post.content %>
 						</div>
+						<!-- <%#- post.content.substring(0,400) %>... -->
 						<div class="admin-area text-end">
 							<a
 								class="btn btn-sm btn-primary"
@@ -108,7 +108,7 @@
 							>
 							<a
 								class="btn btn-sm btn-danger"
-								href="/post/:id/delete"
+								href="/post/<%= post.id %>/delete"
 								onclick="return confirm('Are you sure?')"
 								>Delete</a
 							>
@@ -229,17 +229,19 @@
                     </div>
                 </article> -->
 					<!-- Pagination -->
-					<% console.log(details) %>
+					<% console.log(details); %>
 					<nav class="blog-pagination" aria-label="Pagination">
-						<% for( let pageNo = 1; pageNo <=
-						details?.pages.totalPage; pageNo++ ) { %>
+						<% for (let pageNo = 1; pageNo <=
+						details?.pages?.totalPage; pageNo++) { %>
 						<a
-							class="btn btn-<%= (details?.pages.activePage == pageNo) ? 'primary' : 'outline-primary' %> rounded-pill"
-							href="/post?page=<%=pageNo%>"
-							><%= pageNo %></a
+							class="btn btn-<%= (details?.pages?.activePage == pageNo) ? 'primary' : 'outline-primary' %> rounded-pill"
+							href="<%= pageUrl %>?page=<%= pageNo %>"
 						>
+							<%= pageNo %>
+						</a>
 						<% } %>
 					</nav>
+
 					<p class="text-end p-2 border-top">
 						Total <%= details.total %> Posts
 					</p>
@@ -258,13 +260,10 @@
 									>
 										<div class="col-lg-8">
 											<h5><%= item.title %></h5>
-											<!-- <p class="my-2">
-												Lorem ipsum dolor sit amet
-												consectetur adipisicing elit...
-											</p> -->
+											<!-- <p class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p> -->
 											<!-- <div class="line-clamp-3 my-2">
-												<%- item.content %>
-											</div> -->
+                                            <%#- item.content %>
+                                         </div> -->
 											<p class="line-clamp-3 my-2">
 												<%=
 												item.content.replace(/<(.|\n)*?>/g,'')
@@ -278,7 +277,6 @@
 										</div>
 									</a>
 								</li>
-
 								<% }) %>
 							</ul>
 						</div>
