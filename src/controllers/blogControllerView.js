@@ -65,11 +65,13 @@ module.exports.BlogPostController = {
 			{ path: "userId" },
 		]);
 
-		//*http://127.0.0.1:8000/blog/post?limit=22&filter[userId]=667d10dc03839026052691ab&search[title]=test&search[content]=test 1&sort[title]=desc
-		res.status(200).send({
-			error: false,
-			details: await res.getModelListDetails(BlogPost),
-			blogs: data,
+		// res.status(200).send({
+		//   error: false,
+		//   details: await res.getModelListDetails(BlogPost),
+		//   blogs: data,
+		// });
+		res.render("index", {
+			posts: data,
 		});
 	},
 	create: async (req, res) => {

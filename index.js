@@ -23,16 +23,19 @@ app.use(
 	})
 );
 
-/!* ----------------------Template----------------------------------*/;
+/* -------------------------------------------------------------------------- */
+/*                                  Template                                  */
+/* -------------------------------------------------------------------------- */
 
-app.set("view engine", "ejs"); //template engine ayarini set() ile yaptik
-// app.set("views","./views")//default
-app.set("views", "./public"); //default olan yerine kök dizindeki oublic i baz almasini istiyoruz
+app.set("view engine", "ejs"); //! express de template engine olarak ejs i kullanacam diye ayar yapıyorum. Ayar yaparken set() metodu kullanılır.
+// app.set("views", "./views"); Default klasör
+//? Default olarak express klasör olarak views klasörünü arar. Ben istersem bunu da değiştirebilirim.
+app.set("views", "./public"); //* views klasörü yerine public klasörünü kullan. Zorunlu bir işlem değil views olarak da kalabilir.
 
-//!express.urlencoded()
-// app.use(express.urlencoded({ extended: false })); //expressten gelen gelen datalari forma uygun hale getirmek icin express.urlencoded i cagiriyoruz.false ayari string olarak getirir.
-
-app.use(express.urlencoded({ extended: true })); //gelen form datayi json a cevirmesi icin true yapiyoruz.
+//! express.urlencoded() is a body parser for html post form.
+//* Gelen verilerin sadece string olarak ele alnıması istenirse, extended: false özelliği kullanılır, fakat eğer bir JSON nesnesi olarak ele alınması istenirse, extended: true parametresi ile kullanmak gerekir. API hizmeti de sunduğumuz için bizim için uygun olan seçenek {extended: true} olacaktır.
+// app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: true }));
 
 //? user control
 app.use(require("./src/middlewares/userControl"));
@@ -44,23 +47,27 @@ app.use(require("./src/middlewares/findSearchSortPagi"));
 // app.all('/', (req, res) => {
 //     res.send("<h1 style='text-align:center;margin-top:150px'>WELCOME TO BLOG API</h1>");
 // })
-app.all("/", (req, res) => {
-	if (req.isLogin) {
-		res.send({
-			message: "Welcome to BlogApi",
-			session: req.session,
-			user: req.user,
-		});
-	} else {
-		res.send({
-			message: "Welcome to BlogApi",
-			session: req.session,
-		});
-	}
-});
+// app.all("/", (req, res) => {
+//   if (req.isLogin) {
+//     res.send({
+//       message: "Welcome to BlogApi",
+//       session: req.session,
+//       user: req.user
+//     });
+//   }else {
+//     res.send({
+//       message: "Welcome to BlogApi",
+//       session: req.session,
+//     });
+//   }
+// });
 
-app.use("/blog", require("./src/routes/blogRoute"));
-app.use("/user", require("./src/routes/user.route"));
+// app.use("/blog", require("./src/routes/blogRoute"));
+// app.use("/user", require("./src/routes/user.route"));
+
+app.use("/api/blog", require("./src/routes/blogRoute"));
+app.use("/api/user", require("./src/routes/user.route"));
+app.use("/", require("./src/routes/view"));
 
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));

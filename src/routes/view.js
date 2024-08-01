@@ -10,6 +10,10 @@ const {
 
 //! base route => /blog
 
+router.all("/", (req, res) => {
+	res.redirect("/post");
+});
+
 router.all("/post", BlogPostControllerView.list);
 router.all("/post/create", BlogPostControllerView.create);
 router.all("/post/:postId/update", BlogPostControllerView.update);
