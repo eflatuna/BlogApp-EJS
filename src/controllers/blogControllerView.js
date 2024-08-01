@@ -79,6 +79,8 @@ module.exports.BlogPostController = {
 			categories,
 			selectedCategory: req.query?.filter?.blogCategoryId,
 			recentPosts,
+			details: await res.getModelListDetails(BlogPost),
+			pageUrl: req.url,
 		});
 	},
 	create: async (req, res) => {
