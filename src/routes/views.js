@@ -24,4 +24,8 @@ router.all("/post/:postId/update", BlogPostControllerView.update);
 router.all("/post/:postId", BlogPostControllerView.read);
 router.all("/post/:postId/delete", BlogPostControllerView.delete);
 
+const UserView = require("../controllers/user.controller.view");
+router.all("/login", UserView.login);
+router.all("/logout", UserView.logout);
+
 module.exports = router;
