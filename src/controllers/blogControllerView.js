@@ -107,13 +107,21 @@ module.exports.BlogPostController = {
 		});
 	},
 	create: async (req, res) => {
-		// req.body.userId = req.session.id
-		const data = await BlogPost.create(req.body);
+		if (req.method == "POST") {
+			// req.body.userId = req.session.id
+			const data = await BlogPost.create(req.body);
 
-		res.status(201).send({
-			error: false,
-			blog: data,
-		});
+			// res.status(201).send({
+			// 	error: false,
+			// 	blog: data,
+			// });
+		} else {
+			res.render("postForm", {
+				user: req.session,
+				categories: await BlogCategory.find(),
+				title: "New Post",
+			});
+		}
 	},
 	read: async (req, res) => {
 		const data = await BlogPost.findOne({
