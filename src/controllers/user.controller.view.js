@@ -30,9 +30,9 @@ module.exports = {
 							req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
 						}
 						// res.status(200).send({
-						//   error: false,
-						//   message: "Login Ok!",
-						//   user,
+						// 	error: false,
+						// 	message: "Login Ok!",
+						// 	user,
 						// });
 						res.redirect("/");
 					} else {
