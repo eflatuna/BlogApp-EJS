@@ -66,7 +66,7 @@ module.exports.BlogPostController = {
 		]);
 
 		// console.log(req.query)
-		// console.log(req.session)
+		// console.log(req.session);
 
 		const categories = await BlogCategory.find();
 		const recentPosts = await BlogPost.find()
