@@ -108,7 +108,7 @@ module.exports.BlogPostController = {
 	},
 	create: async (req, res) => {
 		if (req.method == "POST") {
-			// req.body.userId = req.session.id
+			req.body.userId = req.session.id;
 			const data = await BlogPost.create(req.body);
 
 			// res.status(201).send({
