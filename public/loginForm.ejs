@@ -9,6 +9,10 @@
 <main class="container">
     <div class="row g-5">
         <div class="col-md-12 p-3">
+            <% if (message) { %>
+                <div class="alert alert-warning" role="alert"> <%= message %>
+             
+            <% } %>
             <p>
                 <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
             </p>
@@ -40,5 +44,14 @@
 
 <%- include('partials/footer') %>
 <!-- main end -->
+<script>
+    const alertDiv = document.querySelector('.alert')
+    if(alertDiv){
+        setTimeout(()=>{
+            alertDiv.style.display = 'none'
+        },4000)
+    }
+</script>
+
 </body>
 </html>
