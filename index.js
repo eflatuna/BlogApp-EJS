@@ -30,7 +30,7 @@ app.use(
 app.set("view engine", "ejs"); //! express de template engine olarak ejs i kullanacam diye ayar yapıyorum. Ayar yaparken set() metodu kullanılır.
 // app.set("views", "./views"); Default klasör
 //? Default olarak express klasör olarak views klasörünü arar. Ben istersem bunu da değiştirebilirim.
-app.set("views", "./public"); //* views klasörü yerine public klasörünü kullan. Zorunlu bir işlem değil views olarak da kalabilir.
+// app.set("views", "./public"); //* views klasörü yerine public klasörünü kullan. Zorunlu bir işlem değil views olarak da kalabilir.
 
 //! express.urlencoded() is a body parser for html post form.
 //* Gelen verilerin sadece string olarak ele alnıması istenirse, extended: false özelliği kullanılır, fakat eğer bir JSON nesnesi olarak ele alınması istenirse, extended: true parametresi ile kullanmak gerekir. API hizmeti de sunduğumuz için bizim için uygun olan seçenek {extended: true} olacaktır.
