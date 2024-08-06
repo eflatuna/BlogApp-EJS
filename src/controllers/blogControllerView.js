@@ -115,6 +115,7 @@ module.exports.BlogPostController = {
 			// 	error: false,
 			// 	blog: data,
 			// });
+			res.redirect("/post/" + data._id);
 		} else {
 			res.render("postForm", {
 				user: req.session,
