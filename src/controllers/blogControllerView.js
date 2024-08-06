@@ -66,7 +66,7 @@ module.exports.BlogPostController = {
 		]);
 
 		// console.log(req.query)
-		// console.log(req.session);
+		// console.log(req.session)
 
 		const categories = await BlogCategory.find();
 		const recentPosts = await BlogPost.find()
@@ -112,8 +112,8 @@ module.exports.BlogPostController = {
 			const data = await BlogPost.create(req.body);
 
 			// res.status(201).send({
-			// 	error: false,
-			// 	blog: data,
+			//   error: false,
+			//   blog: data,
 			// });
 			res.redirect("/post/" + data._id);
 		} else {
@@ -121,6 +121,7 @@ module.exports.BlogPostController = {
 				user: req.session,
 				categories: await BlogCategory.find(),
 				title: "New Post",
+				post: null,
 			});
 		}
 	},
@@ -139,15 +140,16 @@ module.exports.BlogPostController = {
 		if (req.method == "POST") {
 			// const data = await BlogPost.findByIdAndUpdate(req.params.id,req.body,{new:true}) // {new:true} => return new data
 			const data = await BlogPost.updateOne(
-				{ _id: req.params.id },
+				{ _id: req.params.postId },
 				req.body
 			); //* datayı döndürmez yaptığı işlemin özetini döner. O nedenle bu yöntemde newData şeklinde sorgu yazıp güncellenmiş halini gönderebiliriz
 
 			// res.status(202).send({
-			// 	error: false,
-			// 	blog: data,
-			// 	newData: await BlogPost.findOne({ _id: req.params.id }),
+			//   error: false,
+			//   blog: data,
+			//   newData: await BlogPost.findOne({ _id: req.params.id }),
 			// });
+			res.redirect("/post/" + req.params.postId);
 		} else {
 			res.render("postForm", {
 				user: req.session,

@@ -30,10 +30,11 @@ module.exports = {
 							req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
 						}
 						// res.status(200).send({
-						// 	error: false,
-						// 	message: "Login Ok!",
-						// 	user,
+						//   error: false,
+						//   message: "Login Ok!",
+						//   user,
 						// });
+						req.session.message = null;
 						res.redirect("/");
 					} else {
 						throw new Error("Login parameters not true!");
@@ -47,6 +48,7 @@ module.exports = {
 		} else {
 			res.render("loginForm", {
 				user: req.session,
+				message: req.session?.message,
 			});
 		}
 	},
